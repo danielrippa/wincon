@@ -191,9 +191,7 @@ implementation
             KEY_EVENT:
               Result := ietKeyEvent;
             _MOUSE_EVENT:
-              begin
-                Result := ietMouseEvent;
-              end;
+              Result := ietMouseEvent;
             WINDOW_BUFFER_SIZE_EVENT:
               Result := ietWindowEvent;
           end;

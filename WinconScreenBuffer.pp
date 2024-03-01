@@ -177,9 +177,10 @@ implementation
 
   function TScreenBuffer.GetAreaCells(aArea: TScreenArea): TScreenCells;
   var
-    I, Len: Integer;
+    I, J, Len: Integer;
     Buffer: array of CHAR_INFO;
     region: SMALL_RECT;
+    C: WideString;
   begin
     Result := Nil;
     with aArea.Size do begin

@@ -19,10 +19,14 @@ interface
         function GetFullScreen: Boolean;
         procedure SetFullScreen(Value: Boolean);
 
+        function GetQuickEditEnabled: Boolean;
+        procedure SetQuickEditEnabled(Value: Boolean);
+
         procedure Init;
       public
         property Title: WideString read GetTitle write SetTitle;
         property FullScreen: Boolean read GetFullScreen write SetFullScreen;
+        property QuickEditEnabled: Boolean read GetQuickEditEnabled write SetQuickEditEnabled;
     end;
 
   var
@@ -30,6 +34,8 @@ interface
     ConsoleWindow: TConsoleWindow;
 
 implementation
+
+  uses WinconUtils;
 
   procedure TConsoleWindow.Init;
   begin
@@ -81,6 +87,16 @@ implementation
     else
       Mode := CONSOLE_WINDOWED_MODE;
     SetConsoleDisplayMode(FOutputHandle, Mode, @lpNewScreenBufferDimensions);
+  end;
+
+  function TConsoleWindow.GetQuickEditEnabled: Boolean;
+  begin
+    GetModeBit(GetMode(FInputHandle), ENABLE_QUICK_EDIT_MODE);
+  end;
+
+  procedure TConsoleWindow.SetQuickEditEnabled(Value: Boolean);
+  begin
+    SetModeBit(FInputHandle, ENABLE_QUICK_EDIT_MODE, Value);
   end;
 
   initialization
